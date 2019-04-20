@@ -15,6 +15,34 @@ const app = express();
 app.use(bodyParser.json());
 app.use(favicon(path.join(__dirname,'assets','favicon.ico')));
 
+const user = userId => {
+    return User.findById(userId)
+        .then(user => {
+            return {
+                ...user._doc,
+                // createdEvents: events.bind(this, user._doc.createdEvents)
+            };
+        })
+        .catch(error => {
+            throw error
+        });
+}
+
+// const events = eventIds => {
+//     return Event.find({ _id: {$in: eventIds} })
+//         .then(events => {
+//             return events.map(event => {
+//                 return {
+//                     ...event._doc,
+//                     creator: user.bind(this, event.creator)
+//                 };
+//             });
+//         })
+//         .catch(error => {
+//             throw error
+//         })
+// }
+
 app.get('/', (req, res, next) => {
     res.send('<a href="http://localhost:3000/graphql">Play With Api?</a>')
 })
@@ -28,12 +56,14 @@ app.use('/graphql', graphqlHttp({
             description: String
             price: Float!
             date: String!
+            creator: User
         }
 
         type User {
             _id: ID!
             email: String!
             password: String
+            createdEvent: [Event!]
         }
 
         input EventInput {
@@ -64,9 +94,13 @@ app.use('/graphql', graphqlHttp({
     ),
     rootValue: {
         events: () => {
-           return  Event.find().then(events => {
+           return  Event.find().populate('creator')
+            .then(events => {
                 return events.map(event => {
-                    return { ...event._doc }
+                    return {
+                        ...event._doc,
+                        creator: user.bind(this, event._doc.creator)
+                    }
                 })
             })
         },
