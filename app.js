@@ -4,9 +4,10 @@ const graphqlHttp = require('express-graphql');
 const { buildSchema } = require('graphql');
 const favicon = require('serve-favicon');
 const path = require('path');
+const mongoose = require('mongoose');
+const Event = require('./models/event');
 
 const app = express();
-const events = [];
 
 app.use(bodyParser.json());
 app.use(favicon(path.join(__dirname,'assets','favicon.ico')));
@@ -48,21 +49,34 @@ app.use('/graphql', graphqlHttp({
     ),
     rootValue: {
         events: () => {
-            return events;
+           return  Event.find().then(events => {
+                return events.map(event => {
+                    return { ...event._doc }
+                })
+            })
         },
         createEvent: args => {
-            const event = {
-                _id: Math.random().toString(),
+            const event = new Event({
                 title: args.input.title,
                 description: args.input.description,
                 price: args.input.price,
                 date: new Date().toISOString()
-            }
-            events.push(event);
-            return event;
+            })
+            return event
+                .save().then( res => {
+                    return { ...res._doc };
+                }).catch( error => {
+                    console.error(error);
+                    throw error;
+                });
         }
     },
     graphiql: true
 }));
 
-app.listen(3000);
+mongoose.connect(`mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@cluster0-lcraj.mongodb.net/${process.env.MONGO_DB}?retryWrites=true`,{ useNewUrlParser: true })
+.then( () => {
+    app.listen(3000);
+}).catch( error => {
+    console.error(error);
+})
