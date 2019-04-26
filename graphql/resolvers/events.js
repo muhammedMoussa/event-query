@@ -22,7 +22,7 @@ module.exports = {
       const event = new Event({
         title: args.eventInput.title,
         description: args.eventInput.description,
-        price: args.eventInput.price,
+        price: +args.eventInput.price,
         date: new Date(args.eventInput.date),
         creator: req.userId
       });
