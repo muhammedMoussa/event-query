@@ -5,12 +5,14 @@ const favicon = require('serve-favicon');
 const path = require('path');
 const mongoose = require('mongoose');
 
+const isAuth = require('./middleware/is-auth');
 const graphiqlSchema = require('./graphql/schema/index');
 const graphiqlResolvers = require('./graphql/resolvers/index');
 
 const app = express();
 
 app.use(bodyParser.json());
+app.use(isAuth);
 app.use(favicon(path.join(__dirname,'assets','favicon.ico')));
 
 app.get('/', (req, res, next) => {
