@@ -16,7 +16,7 @@ app.use(isAuth);
 app.use(favicon(path.join(__dirname,'assets','favicon.ico')));
 
 app.get('/', (req, res, next) => {
-    res.send('<a href="http://localhost:3000/graphql">Play With Api?</a>')
+    res.send('<a href="http://localhost:3003/graphql">Play With Api?</a>')
 })
 
 /* GraphQl Configuration */
@@ -28,7 +28,7 @@ app.use('/graphql', graphqlHttp({
 
 mongoose.connect(`mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@cluster0-lcraj.mongodb.net/${process.env.MONGO_DB}?retryWrites=true`,{ useNewUrlParser: true })
 .then( () => {
-    app.listen(3000);
+    app.listen(3003);
 }).catch( error => {
     console.error(error);
 })
