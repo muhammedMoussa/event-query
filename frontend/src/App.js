@@ -10,8 +10,8 @@ import MainNavigation from './components/Navigation/MainNavigation';
 function App() {
   return (
     <BrowserRouter>
-              <React.Fragment>
-          <MainNavigation />
+      <React.Fragment>
+        <MainNavigation />
           <main className="main-content">
             <Switch>
               <Redirect from="/" to="/auth" exact />
@@ -20,7 +20,7 @@ function App() {
               <Route path="/bookings" component={BookingsPage} />
             </Switch>
           </main>
-        </React.Fragment>
+      </React.Fragment>
     </BrowserRouter>
   );
 }
