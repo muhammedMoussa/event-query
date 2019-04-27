@@ -160,7 +160,6 @@ class EventsPage extends Component {
     }
 
     bookEventHandler = () => {
-        debugger
         if (!this.context.token) {
           this.setState({ selectedEvent: null });
           return;
