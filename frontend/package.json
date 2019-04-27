@@ -3,12 +3,13 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@material-ui/core": "^3.9.3",
+    "chart.js": "^1.1.1",
     "react": "^16.8.6",
+    "react-chartjs": "^1.2.0",
     "react-dom": "^16.8.6",
     "react-router-dom": "^5.0.0",
-    "react-scripts": "3.0.0",
-    "chart.js": "^1.1.1",
-    "react-chartjs": "^1.2.0"
+    "react-scripts": "3.0.0"
   },
   "scripts": {
     "start": "react-scripts start",
