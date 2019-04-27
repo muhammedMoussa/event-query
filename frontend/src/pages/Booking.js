@@ -31,6 +31,7 @@ class BookingsPage extends Component {
                _id
                title
                date
+               price
              }
             }
           }
@@ -128,7 +129,7 @@ class BookingsPage extends Component {
               onDelete={this.deleteBookingHandler}
             />
           ) : (
-            <BookinsChart />
+            <BookinsChart bookings={this.state.bookings} />
           )}
         </React.Fragment>
 
