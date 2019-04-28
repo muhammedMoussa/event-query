@@ -19,7 +19,7 @@ $ npm start
 - Run App:
 > open another terminal.
 ```sh
-$ cd front
+$ cd frontend
 $ npm install 
 $ npm start 
 ```
