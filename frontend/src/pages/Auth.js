@@ -1,11 +1,15 @@
 import React, { Component } from 'react';
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
 
 import './Auth.css';
 import AuthContext from '../context/auth-context';
 
 class AuthPage extends Component {
     state = {
-        isLogin: true
+        isLogin: true,
+        email: null,
+        password: null
     };
 
     static contextType = AuthContext;
@@ -18,16 +22,10 @@ class AuthPage extends Component {
         });
     };
 
-    constructor(props) {
-        super(props);
-        this.emailEl = React.createRef();
-        this.passwordEl = React.createRef();
-    };
-
     submitHandler = event => {
         event.preventDefault();
-        const email = this.emailEl.current.value;
-        const password = this.passwordEl.current.value;
+        const email = this.state.email;
+        const password = this.state.password;
 
         if(email.trim().length === 0 || password.trim().length === 0) {
             return;
@@ -91,22 +89,46 @@ class AuthPage extends Component {
         });
     };
 
+    handleInputChange = name => event => {
+        this.setState({ [name]: event.target.value });
+    };
+
     render() {
         return (
             <form className="auth-form" onSubmit={this.submitHandler}>
                 <div className="form-control">
-                    <label htmlFor="email">E-Mail</label>
-                    <input type="email" id="email" ref={this.emailEl} />
+                    <TextField
+                        label="E-Mail"
+                        style={{ margin: 8 }}
+                        placeholder="Type your mail.."
+                        helperText="example@mail.com"
+                        fullWidth
+                        margin="normal"
+                        InputLabelProps={{
+                            shrink: true,
+                        }}
+                        onChange={this.handleInputChange('email')}
+                    />
                 </div>
                 <div className="form-control">
-                    <label htmlFor="password">Password</label>
-                    <input type="password" id="password" ref={this.passwordEl} />
+                    <TextField
+                        label="Password"
+                        style={{ margin: 8 }}
+                        placeholder="Type your password.."
+                        fullWidth
+                        margin="normal"
+                        InputLabelProps={{
+                            shrink: true,
+                        }}
+                        type="password"
+                        onChange={this.handleInputChange('password')}
+                    />
                 </div>
                 <div className="form-actions">
-                    <button type="submit">Submit</button>
-                    <button type="button" onClick={this.switchModeHandler}>
+                    <Button type="submit">Submit</Button>
+                    <Button type="button" onClick={this.switchModeHandler}>
                         Switch to {this.state.isLogin ? 'Signup' : 'Login'}
-                    </button>
+                    </Button>
                 </div>
             </form>
         )
