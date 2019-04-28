@@ -1,4 +1,5 @@
 import React from 'react';
+import Button from '@material-ui/core/Button';
 
 import './BookingsList.css';
 
@@ -11,8 +12,8 @@ const bookingList = props => (
             {booking.event.title} -{' '}
             {new Date(booking.createdAt).toLocaleDateString()}
           </div>
-          <div className="bookings__item-actions">
-            <button className="btn" onClick={props.onDelete.bind(this, booking._id)}>Cancel</button>
+          <div className="bookings__item-actions form-actions">
+            <Button className="btn" onClick={props.onDelete.bind(this, booking._id)}>Cancel</Button>
           </div>
         </li>
       );
