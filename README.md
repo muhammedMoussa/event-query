@@ -1,4 +1,69 @@
+# EventQuery :tada: 
+> Sample event organizing and booking complete app,made with ❤️ in Nodejs, Express, MongoDB and GraphQl as backend, and React at front.
 
-# EventQuery Under Construction <img width="45" alt="schermafbeelding 2017-09-27 om 23 08 12" src="https://user-images.githubusercontent.com/7254997/30937972-c9632d04-a3d8-11e7-87f3-c44ce2b86d24.png">
+# App Features! :star2:	
+- User Registration && Authentication.
+- Create Events Per User.
+- Show all Users Created Events.
+- Events Bookings.
+- Bookings Cancel.
+- Events Bucket Chart.
 
-<img width="850" alt="underconstruction" src="https://user-images.githubusercontent.com/7254997/30869205-d96d9962-a2e0-11e7-9044-0a7ff708e6c3.png">
+### Runing Rorblog! :fire:
+- Run Server:
+```sh
+$ cd event-query
+$ npm install 
+$ npm start 
+```
+- Run App:
+> open another terminal.
+```sh
+$ cd front
+$ npm install 
+$ npm start 
+```
+### Login :door:
+Switch to signup, and create account to login, or use:
+> emial: test@test.com <br />
+> password: test
+
+
+### Todos :fast_forward:
+
+- Moving to MaterialUI.
+- Remove Events.
+- Add Toasters and Some Validations.
+- Config Run Server and App in One Command.
+- Social media websites login.
+
+
+### Plugins :briefcase:
+
+EventQuery is currently extended with the following plugins. Instructions on how to use them in your own application are linked below.
+
+| Plugin | README |
+| ------ | ------ |
+| Express | [https://expressjs.com/] |
+| GraphQL | [https://graphql.org/] |
+| React | [https://reactjs.org/] |
+| Express GraphQL | [https://github.com/graphql/express-graphql] |
+| Mongoosejs | [https://mongoosejs.com/] |
+| Jsonwebtoken | [https://www.npmjs.com/package/jsonwebtoken] |
+| DataLoader | [https://github.com/graphql/dataloader] |
+| Serve Favicon | [https://github.com/expressjs/serve-favicon] |
+| Body Parser | [https://www.npmjs.com/package/body-parser] |
+| Bcryptjs | [https://www.npmjs.com/package/bcryptjs] |
+| Nodemon | [https://nodemon.io/] |
+| Chartjs | [https://www.chartjs.org/] |
+| React Chartjs | [https://github.com/reactjs/react-chartjs] |
+
+#### 
+
+Find me on [Twitter](https://twitter.com/muhammedMoussa), thank to the awesome teacher [@maxedapps](https://twitter.com/maxedapps).
+
+License :shipit:
+----
+MIT 
+
+:open_hands:
