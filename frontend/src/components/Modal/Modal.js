@@ -1,4 +1,5 @@
 import React from 'react';
+import Button from '@material-ui/core/Button';
 
 import './Modal.css';
 
@@ -8,16 +9,16 @@ const modal = props => (
       <h1>{props.title}</h1>
     </header>
     <section className="modal__content">{props.children}</section>
-    <section className="modal__actions">
+    <section className="modal__actions form-actions">
       {props.canCancel && (
-        <button className="btn" onClick={props.onCancel}>
+        <Button className="btn" onClick={props.onCancel}>
           Cancel
-        </button>
+        </Button>
       )}
       {props.canConfirm && (
-        <button className="btn" onClick={props.onConfirm}>
+        <Button className="btn" onClick={props.onConfirm}>
           { props.confirmText }
-        </button>
+        </Button>
       )}
     </section>
   </div>

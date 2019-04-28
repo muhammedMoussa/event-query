@@ -1,4 +1,5 @@
 import React from 'react'
+import Button from '@material-ui/core/Button';
 
 import './EventItem.css';
 
@@ -14,9 +15,11 @@ const eventItem = props => (
       {props.userId === props.creatorId ? (
         <p>Your the owner of this event.</p>
       ) : (
-        <button className="btn" onClick={props.onDetail.bind(this, props.eventId)}>
+        <div className="form-actions">
+          <Button className="btn" onClick={props.onDetail.bind(this, props.eventId)}>
           View & Booking
-        </button>
+        </Button>
+        </div>
       )}
     </div>
   </li>

@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
 
 import Modal from '../components/Modal/Modal';
 import Backdrop from '../components/Backdrop/Backdrop';
@@ -12,20 +14,16 @@ class EventsPage extends Component {
         creating: false,
         events: [],
         isLoading: false,
-        selectedEvent: null
+        selectedEvent: null,
+        title: null,
+        price: null,
+        date: null,
+        description: null,
     }
 
     isActive = true;
 
     static contextType = AuthContext;
-
-    constructor(props) {
-        super(props);
-        this.titleEl = React.createRef();
-        this.priceEl = React.createRef();
-        this.dateEl = React.createRef();
-        this.descriptionEl = React.createRef();
-    }
 
     componentDidMount() {
         this.fetchEvents();
@@ -40,11 +38,12 @@ class EventsPage extends Component {
     }
 
     modalSubmitHandler = () => {
+        debugger
         this.setState({ creating: false });
-        const title = this.titleEl.current.value;
-        const price = +this.priceEl.current.value;
-        const date = this.dateEl.current.value;
-        const description = this.descriptionEl.current.value;
+        const title = this.state.title;
+        const price = +this.state.price;
+        const date = this.state.date;
+        const description = this.state.description;
 
         if (title.trim().length === 0
             || price <= 0
@@ -206,12 +205,15 @@ class EventsPage extends Component {
           .catch(err => {
             console.log(err);
           });
-      };
+    };
 
-      componentWillUnmount() {
+    componentWillUnmount() {
         this.isActive = false;
-      }
+    }
 
+    handleInputChange = name => event => {
+        this.setState({ [name]: event.target.value });
+    };
     render() {
         return (
             <React.Fragment>
@@ -227,23 +229,61 @@ class EventsPage extends Component {
                     >
                         <form>
                             <div className="form-control">
-                                <label htmlFor="title">Title</label>
-                                <input type="text" id="title" ref={this.titleEl} />
+                                <TextField
+                                    label="Title"
+                                    style={{ margin: 8 }}
+                                    placeholder="Event Title"
+                                    fullWidth
+                                    margin="normal"
+                                    InputLabelProps={{
+                                        shrink: true,
+                                    }}
+                                    onChange={this.handleInputChange('title')}
+                                />
                             </div>
                             <div className="form-control">
-                                <label htmlFor="price">Price</label>
-                                <input type="number" min="0" id="price" ref={this.priceEl} />
+                                <TextField
+                                    label="Price"
+                                    type="number"
+                                    min="0"
+                                    style={{ margin: 8 }}
+                                    placeholder="Event Price"
+                                    fullWidth
+                                    margin="normal"
+                                    InputLabelProps={{
+                                        shrink: true,
+                                    }}
+                                    onChange={this.handleInputChange('price')}
+                                />
                             </div>
                             <div className="form-control">
-                                <label htmlFor="date">Date</label>
-                                <input type="datetime-local" id="date" ref={this.dateEl} />
+                                <TextField
+                                    label="Price"
+                                    type="datetime-local"
+                                    style={{ margin: 8 }}
+                                    placeholder="Event Date and Time"
+                                    fullWidth
+                                    margin="normal"
+                                    InputLabelProps={{
+                                        shrink: true,
+                                    }}
+                                    onChange={this.handleInputChange('date')}
+                                />
                             </div>
                             <div className="form-control">
-                                <label htmlFor="description">Description</label>
-                                <textarea
-                                    id="description"
-                                    rows="4"
-                                    ref={this.descriptionEl}
+                            <TextField
+                                    label="Description"
+                                    multiline={true}
+                                    rows={2}
+                                    rowsMax={4}
+                                    style={{ margin: 8 }}
+                                    placeholder="About Event.."
+                                    fullWidth
+                                    margin="normal"
+                                    InputLabelProps={{
+                                        shrink: true,
+                                    }}
+                                    onChange={this.handleInputChange('description')}
                                 />
                             </div>
                         </form>
@@ -267,14 +307,14 @@ class EventsPage extends Component {
                     </Modal>
                 )}
                 { this.context.token && (
-                    <div className="events-control">
+                    <div className="events-control form-actions">
                         <p>Share your own Events!</p>
-                        <button
+                        <Button
                             className="btn"
                             onClick={this.startCreateEventHandler}
                         >
                             Create Event
-                        </button>
+                        </Button>
                     </div>
                 )}
                 { this.state.isLoading ? (
